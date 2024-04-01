@@ -7,10 +7,13 @@ run:
 update:
 	rustup update
 
-int:
+init:
 	cargo init
 
 build:
 	cargo build --release
 
-.PHONY: test run update int
+install:
+	cargo install --path .
+
+.PHONY: test run update init
