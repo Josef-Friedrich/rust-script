@@ -1,4 +1,4 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{Parser, Subcommand};
 use os_info;
 use std::env;
 
@@ -13,15 +13,13 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Show informtions about the OS
-    Os(Os),
+    /// Show informations about the OS
+    Os,
 
     /// Show the session type on Linux: wayland, x11, etc.
+    #[clap(aliases = &["session", "s"])]
     SessionType,
 }
-
-#[derive(Args)]
-struct Os {}
 
 fn print_os_release() {
     let os_release = os_info::get();
@@ -34,14 +32,20 @@ fn print_os_release() {
 
     match os_release.edition() {
         Some(edition) => {
-            println!("Edition: {:?}", edition);
+            println!("Edition: {}", edition);
         }
         None => {}
     }
 
-    println!("Codename: {:#?}", os_release.codename());
+    if os_release.codename().is_some() {
+        println!("Codename: {}", os_release.codename().unwrap());
+    }
+
     println!("Bitness: {}", os_release.bitness());
-    println!("Architecture: {:#?}", os_release.architecture());
+
+    if os_release.architecture().is_some() {
+        println!("Architecture: {}", os_release.architecture().unwrap());
+    }
 }
 
 fn print_session_type() {
@@ -55,7 +59,7 @@ fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::Os(_) => {
+        Commands::Os => {
             print_os_release();
         }
 
