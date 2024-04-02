@@ -1,9 +1,13 @@
 [package]
-name = "rust-script"
+name = "jf-tool"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Josef Friedrich <josef@friedrich.rocks>"]
+description = "My personal command line tool for various tasks."
+readme = "README.md"
+categories = ["command-line-utilities"]
+license = "MIT"
+repository = "https://github.com/Josef-Friedrich/rust-tool"
 
 [[bin]]
 name = "tool"
