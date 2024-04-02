@@ -14,6 +14,6 @@ build:
 	cargo build --release
 
 install:
-	cargo install --path .
+	cargo install --force --path .
 
 .PHONY: test run update init
